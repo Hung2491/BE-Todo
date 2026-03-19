@@ -13,13 +13,14 @@ export const getAllTasks = async (req: Request, res: Response) => {
 export const createTask = async (req: Request, res: Response) => {
   try {
     const { title, comment, tag, date, completed } = req.body;
-    if (!title || !comment || !tag || !date || completed === undefined) {
-      return res.status(400).json({ error: 'All fields are required' });
-    }
+    // if (!title || !comment || !tag || !date || completed === undefined) {
+    //   return res.status(400).json({ error: 'All fields are required' });
+    // }
     const newTask = new Task({ title, comment, tag, date, completed });
     await newTask.save();
     res.status(201).json(newTask);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Server error' });
   }
 };

@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Hoàn thiện báo cáo Q1",
+    "comment": "Tổng hợp số liệu doanh thu và chi phí quý 1, gửi cho trưởng phòng trước 5h chiều",
+    "tag": "work",
+    "date": "2026-03-20",
+    "completed": false
+  },
+  {
+    "title": "Họp team weekly",
+    "comment": "Chuẩn bị slide cập nhật tiến độ sprint, review backlog tuần tới",
+    "tag": "meeting",
+    "date": "2026-03-21",
+    "completed": false
+  },
+  {
+    "title": "Fix bug login form",
+    "comment": "Lỗi validation email không hiển thị đúng khi nhập sai định dạng",
+    "tag": "dev",
+    "date": "2026-03-19",
+    "completed": true
+  },
+  {
+    "title": "Mua sắm cuối tuần",
+    "comment": "Rau củ, thịt, sữa, đồ dùng nhà bếp",
+    "tag": "personal",
+    "date": "2026-03-22",
+    "completed": false
+  },
+  {
+    "title": "Đọc sách Clean Code",
+    "comment": "Đọc từ chương 5 đến chương 8, ghi chú các nguyên tắc quan trọng",
+    "tag": "learning",
+    "date": "2026-03-23",
+    "completed": false
+  },
+  {
+    "title": "Review PR của Nam",
+    "comment": "Review pull request #42 - tính năng export Excel, kiểm tra edge case",
+    "tag": "dev",
+    "date": "2026-03-19",
+    "completed": true
+  },
+  {
+    "title": "Gia hạn domain website",
+    "comment": "Domain hết hạn vào 25/3, thanh toán qua Namecheap",
+    "tag": "work",
+    "date": "2026-03-24",
+    "completed": false
+  },
+  {
+    "title": "Tập gym",
+    "comment": "Ngực + tay sau, 45 phút cardio",
+    "tag": "personal",
+    "date": "2026-03-20",
+    "completed": false
+  }
+]
