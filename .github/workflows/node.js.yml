@@ -56,7 +56,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            cd ~/project/BE-todo
+            cd ~/project/FB-Todo-App/BE-Todo
 
             # Load image
             docker load < be-todo.tar
