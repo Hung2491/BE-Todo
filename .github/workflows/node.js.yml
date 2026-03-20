@@ -1,0 +1,72 @@
+name: BE Todo Docker CI/CD
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1. Build Docker Image cho Backend
+      - name: Build Docker Image
+        run: docker build -t be-todo:latest .
+
+      # 2. Save Image thành file tar
+      - name: Save Docker Image
+        run: docker save be-todo:latest > be-todo.tar
+
+      # 3. Upload artifact
+      - name: Upload Image Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: be-todo-image
+          path: be-todo.tar
+          retention-days: 1
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+      # 4. Download lại image từ artifact
+      - name: Download Image Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: be-todo-image
+
+      # 5. Copy lên VPS
+      - name: Copy files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: "be-todo.tar,docker-compose.yml,.env"
+          target: "~/project/BE-todo"
+
+      # 6. SSH và deploy
+      - name: Docker Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            cd ~/project/BE-todo
+
+            # Load image
+            docker load < be-todo.tar
+
+            # Stop container cũ nếu có
+            docker stop be-todo || true
+            docker rm be-todo || true
+
+            # Run bằng docker compose
+            docker compose up -d
+
+            # Clean image cũ
+            docker image prune -f
