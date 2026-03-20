@@ -23,10 +23,6 @@ RUN npm ci --omit=dev
 # Copy compiled JS from builder stage
 COPY --from=builder /app/dist ./dist
 
-# Copy seed files (optional, for seeding data)
-COPY seed.js ./
-COPY seed-data.json ./
-
 # Expose application port
 EXPOSE 3000
 
